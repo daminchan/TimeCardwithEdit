@@ -1,4 +1,4 @@
-import { Box, Heading, Container, Link } from '@chakra-ui/react';
+import { Box, Heading, Link } from '@chakra-ui/react';
 import { unstable_cache } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -7,7 +7,7 @@ import CustomButton from '@/components/button/CustomButton';
 import FlexCol from '@/components/ui/FlexCol';
 import { getMonthlyShifts } from '@/features/shift/actions/shiftActions';
 import ShiftEditTable from '@/features/shift/components/ShiftEditTable';
-import ShiftViewTable from '@/features/shift/components/ShiftViewTable';
+
 // キャッシュされたgetMonthlyShifts関数を作成
 const cachedGetMonthlyShifts = unstable_cache(
   async (year: number, month: number) => {
