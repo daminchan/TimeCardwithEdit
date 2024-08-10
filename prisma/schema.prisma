@@ -1,0 +1,52 @@
+   generator client {
+     provider = "prisma-client-js"
+   }
+
+   datasource db {
+     provider = "postgresql"
+     url      = env("DATABASE_URL")
+   }
+
+   model User {
+     id        String   @id @default(cuid())
+     email     String   @unique
+     password  String
+     name      String
+     role      String   @default("user")
+     workDays  WorkDay[]
+     shifts    Shift[]  // 新しく追加
+   }
+
+   model WorkDay {
+     id        String   @id @default(cuid())
+     userId    String
+     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+     date      DateTime @db.Date
+     entries   WorkEntry[]
+   }
+
+   model WorkEntry {
+     id           String   @id @default(cuid())
+     workDayId    String
+     workDay      WorkDay  @relation(fields: [workDayId], references: [id], onDelete: Cascade)
+     startTime    DateTime
+     endTime      DateTime?
+     breakDuration Int?    // 休憩時間（分）
+   }
+
+   // 新しく追加するモデル
+model Shift {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date      DateTime @db.Date
+  startTime DateTime
+  endTime   DateTime
+  status    ShiftStatus @default(SCHEDULED)
+}
+
+enum ShiftStatus {
+  SCHEDULED
+  CONFIRMED
+  CANCELED
+}
