@@ -46,10 +46,10 @@ export default function ShiftEditTable({
 
   return (
     <Box overflowX="auto">
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
-            <Th>日付</Th>
+            <Th color={'gray.200'}>日付</Th>
             {users.map((user) => (
               <Th key={user.id}>
                 <Button onClick={() => openAddModal(user.id)}>

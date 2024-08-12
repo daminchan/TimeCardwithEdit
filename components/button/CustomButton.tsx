@@ -1,24 +1,32 @@
 import { Button, ButtonProps } from '@chakra-ui/react';
 
 interface CustomButtonProps extends ButtonProps {
-  // 必要に応じて追加のプロパティを定義できます
+  backgroundColor?: string;
+  hoverBackgroundColor?: string;
+  activeBackgroundColor?: string;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ children, ...props }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({
+  children,
+  backgroundColor = '#5a7df9', // 明るい青紫色
+  hoverBackgroundColor = '#5a7df9', // やや暗い青紫色
+  activeBackgroundColor = '#829ffc',
+  ...props
+}) => {
   return (
     <Button
-      colorScheme="gray"
+      bg={backgroundColor}
       size="lg"
       color="white"
       w="100%"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
       _hover={{
-        bg: 'gray.200',
+        bg: hoverBackgroundColor,
         transform: 'translateY(-2px)',
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
       }}
       _active={{
-        bg: 'gray.300',
+        bg: activeBackgroundColor,
         transform: 'translateY(0)',
         boxShadow: 'inset 0 3px 5px rgba(0, 0, 0, 0.1)',
       }}

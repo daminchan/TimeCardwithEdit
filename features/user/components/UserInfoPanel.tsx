@@ -38,10 +38,7 @@ export default function UserInfoPanel({
           <NavButton href="/user/timecard-view">タイムカード</NavButton>
           {user.role === 'admin' && (
             <>
-              <NavButton href="/admin/shift-edit">シフト管理</NavButton>
-              <NavButton href="/admin/timeCard-edit">
-                タイムカード編集
-              </NavButton>
+              <NavButton href="/admin">管理ページ</NavButton>
             </>
           )}
         </FlexCol>

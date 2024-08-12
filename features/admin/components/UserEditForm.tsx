@@ -88,12 +88,10 @@ export default function UserEditForm({
             <option value="admin">管理者</option>
           </Select>
         </FormControl>
-        <CustomButton type="submit" isLoading={isLoading} colorScheme="blue">
+        <CustomButton type="submit" isLoading={isLoading}>
           更新
         </CustomButton>
-        <CustomButton onClick={onClose} variant="outline">
-          キャンセル
-        </CustomButton>
+        <CustomButton onClick={onClose}>キャンセル</CustomButton>
       </FlexCol>
     </Box>
   );

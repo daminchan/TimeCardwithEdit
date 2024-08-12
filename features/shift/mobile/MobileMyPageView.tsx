@@ -73,10 +73,9 @@ export default function MobileMyPageView({
             // height: "100%",
             boxShadow: '0 6px 12px rgba(0, 0, 0, 0.5)',
             borderRadius: '10px',
-            background: 'rgba(255, 255, 255, 0.5)',
+            // background: 'rgba(255, 255, 255, 0.5)',
           }}
         >
-          {' '}
           <MobileUserInfoPanel
             user={user}
             nextShift={nextShift}
@@ -106,7 +105,7 @@ export default function MobileMyPageView({
             // height: "100%",
             boxShadow: '0 6px 12px rgba(0, 0, 0, 0.5)',
             borderRadius: '10px',
-            background: 'rgba(255, 255, 255, 0.2)',
+            // background: 'rgba(255, 255, 255, 0.5)',
           }}
         >
           <MobileShiftViewTable

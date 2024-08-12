@@ -33,6 +33,20 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({
   headerText,
   submitButtonText,
 }) => {
+  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newStartTime = e.target.value;
+    setEditedShift((prev) => {
+      const newEndTime = synchronizeDate(newStartTime, prev.endTime);
+      return { ...prev, startTime: newStartTime, endTime: newEndTime };
+    });
+  };
+
+  const synchronizeDate = (startTime: string, endTime: string) => {
+    const [startDate, startTimeOnly] = startTime.split('T');
+    const [, endTimeOnly] = endTime.split('T');
+    return `${startDate}T${endTimeOnly}`;
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -45,9 +59,7 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({
             <Input
               type="datetime-local"
               value={editedShift.startTime}
-              onChange={(e) =>
-                setEditedShift({ ...editedShift, startTime: e.target.value })
-              }
+              onChange={handleStartTimeChange}
             />
           </FormControl>
           <FormControl mt={4}>
@@ -62,12 +74,10 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onSubmit}>
+          <Button mr={3} onClick={onSubmit}>
             {submitButtonText}
           </Button>
-          <Button variant="ghost" onClick={onClose}>
-            キャンセル
-          </Button>
+          <Button onClick={onClose}>キャンセル</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

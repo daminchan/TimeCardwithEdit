@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/auth';
+import TimeCardEditPageContent from '@/features/admin/components/TimeCardEditPageContent';
 import { getAllUsers } from '@/features/timeCard/actions/timeCardActions';
 import TimeCardEditPanel from '@/features/timeCard/components/edit/TimeCardEditPanel';
 
@@ -20,7 +21,8 @@ export default async function TimeCardEditPage() {
 
   return (
     <Box p={8}>
-      <TimeCardEditPanel users={users} />;
+      <TimeCardEditPageContent users={users} />
+      {/* <TimeCardEditPanel users={users} /> */}
     </Box>
   );
 }

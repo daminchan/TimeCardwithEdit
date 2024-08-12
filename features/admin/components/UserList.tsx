@@ -42,7 +42,7 @@ export default function UserList({ users: initialUsers }: UserListProps) {
 
   return (
     <Box overflowX="auto">
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
             <Th>名前</Th>

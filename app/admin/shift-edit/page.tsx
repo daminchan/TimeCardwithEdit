@@ -1,4 +1,4 @@
-import { Box, Heading, Link } from '@chakra-ui/react';
+import { Box, Container, Heading, Link } from '@chakra-ui/react';
 import { unstable_cache } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -6,6 +6,7 @@ import { auth } from '@/auth';
 import CustomButton from '@/components/button/CustomButton';
 import FlexCol from '@/components/ui/FlexCol';
 import { getMonthlyShifts } from '@/features/shift/actions/shiftActions';
+import ShiftEditPageContent from '@/features/shift/components/ShiftEditPageContent';
 import ShiftEditTable from '@/features/shift/components/ShiftEditTable';
 
 // キャッシュされたgetMonthlyShifts関数を作成
@@ -37,16 +38,25 @@ export default async function ShiftEditPage() {
   const users = await cachedGetMonthlyShifts(year, month);
 
   return (
-    <FlexCol>
-      <Box py={8}>
-        <Heading as="h1" size="xl" mb={6}>
-          シフト一覧
-        </Heading>
-        <ShiftEditTable users={users} year={year} month={month} />
-      </Box>
-      <Link href="/admin/user-management">
-        <CustomButton>ユーザー管理</CustomButton>
-      </Link>
-    </FlexCol>
+    <Box width="100%" minHeight="100vh">
+      <Container maxWidth="container.xl" py={8}>
+        <ShiftEditPageContent users={users} year={year} month={month} />
+      </Container>
+    </Box>
   );
+  // return (
+  //   <Box width="100%" minHeight="100vh">
+  //     <Container maxWidth="container.xl" py={8}>
+  //       <Heading as="h1" size="xl" mb={6}>
+  //         シフト一覧
+  //       </Heading>
+  //       <Box borderRadius="lg" shadow="md" p={6} mb={6}>
+  //         <ShiftEditTable users={users} year={year} month={month} />
+  //       </Box>
+  //       <Link href="/admin/user-management">
+  //         <CustomButton width="100%">ユーザー管理</CustomButton>
+  //       </Link>
+  //     </Container>
+  //   </Box>
+  // );
 }

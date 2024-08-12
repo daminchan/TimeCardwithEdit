@@ -62,27 +62,53 @@ export async function getNextShiftWithCoworkers(
 }
 
 //次回のシフトを取得するために使用する関数
-
 export async function getUpcomingShifts(
   userId: string,
   limit: number = 5
 ): Promise<Shift[]> {
+  const currentDate = new Date();
+  // 現在の日付から時間部分を削除
+  currentDate.setHours(0, 0, 0, 0);
+
   const shifts = await prisma.shift.findMany({
     where: {
       userId: userId,
-      date: {
-        gte: new Date(),
+      // dateの代わりにstartTimeを使用
+      startTime: {
+        gte: currentDate,
       },
     },
     orderBy: {
-      date: 'asc',
+      startTime: 'asc', // dateの代わりにstartTimeでソート
     },
-    take: limit + 1, // 最新のシフトを含めて取得
+    take: limit, // +1を削除、すべての今後のシフトを含める
   });
 
-  // 最初のシフト（最新のシフト）を除外
-  return shifts.slice(1);
+  // この行を削除、すべてのシフトを返す
+  // return shifts.slice(1);
+  return shifts;
 }
+
+// export async function getUpcomingShifts(
+//   userId: string,
+//   limit: number = 5
+// ): Promise<Shift[]> {
+//   const shifts = await prisma.shift.findMany({
+//     where: {
+//       userId: userId,
+//       date: {
+//         gte: new Date(),
+//       },
+//     },
+//     orderBy: {
+//       date: 'asc',
+//     },
+//     take: limit + 1, // 最新のシフトを含めて取得
+//   });
+
+//   // 最初のシフト（最新のシフト）を除外
+//   return shifts.slice(1);
+// }
 
 //直近のシフトを取得するために使用する関数
 export async function getNextShift(userId: string) {

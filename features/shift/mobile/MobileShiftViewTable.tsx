@@ -56,7 +56,7 @@ export default function MobileShiftViewTable({
   const normalColor = useColorModeValue('white', 'gray.800');
 
   return (
-    <FlexCol gap={4}>
+    <FlexCol gap={4} maxWidth="100%" overflow="hidden">
       <Flex
         justifyContent="flex-end"
         alignItems="center"
@@ -66,19 +66,19 @@ export default function MobileShiftViewTable({
         px={4}
         borderRadius="md"
         cursor="pointer"
-        bg={useColorModeValue('gray.100', 'gray.700')}
+        // bg={useColorModeValue('gray.500', 'gray.700')}
+        gap={3}
       >
         <Switch
           id="show-all-users"
           isChecked={showAllUsers}
           onChange={(e) => setShowAllUsers(e.target.checked)}
-          mr={2}
           size="lg"
         />
-        <Text fontSize="sm">全員のシフトを表示</Text>
+        <Text>全員のシフトを表示</Text>
       </Flex>
-      <Box minW="300px" w="100%">
-        <Accordion allowMultiple>
+      <Box maxWidth="100%" w="80%" overflowX="auto" minW="250px">
+        <Accordion allowMultiple bg="gray.900">
           {days.map((day) => {
             const shiftsForDay = filteredUsers.filter((user) =>
               user.shifts.some((s) => {
@@ -101,7 +101,10 @@ export default function MobileShiftViewTable({
                 <h2>
                   <AccordionButton>
                     <Box flex="1" textAlign="left">
-                      <Text fontWeight={hasShifts ? 'bold' : 'normal'}>
+                      <Text
+                        fontWeight={hasShifts ? 'bold' : 'normal'}
+                        color="gray.500"
+                      >
                         {format(
                           setDate(new Date(year, month - 1), day),
                           'M/d(E)',
@@ -135,8 +138,10 @@ export default function MobileShiftViewTable({
                       });
                       return (
                         <Box key={user.id}>
-                          <Text fontWeight="bold">{user.name}</Text>
-                          <Text>
+                          <Text fontWeight="bold" color="gray.500">
+                            {user.name}
+                          </Text>
+                          <Text color="gray.500">
                             {shift
                               ? `${formatTime(shift.startTime)} - ${formatTime(
                                   shift.endTime
