@@ -53,7 +53,7 @@ export default function MobileMyPageView({
       >
         <motion.div
           animate={{
-            x: showPanel ? '3%' : '-100%',
+            x: showPanel ? 0 : '-100%',
             y: showPanel ? 0 : 20,
             zIndex: showPanel ? 2 : 1,
             rotateY: showPanel ? 0 : -15,
@@ -68,7 +68,7 @@ export default function MobileMyPageView({
           style={{
             position: 'absolute',
             top: 30,
-            left: -10,
+            left: 0,
             width: '100%',
             // height: "100%",
             boxShadow: '0 6px 12px rgba(0, 0, 0, 0.5)',

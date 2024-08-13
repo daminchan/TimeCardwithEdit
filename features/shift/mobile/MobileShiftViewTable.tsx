@@ -78,7 +78,7 @@ export default function MobileShiftViewTable({
         <Text>全員のシフトを表示</Text>
       </Flex>
       <Box maxWidth="100%" w="80%" overflowX="auto" minW="250px">
-        <Accordion allowMultiple bg="gray.900">
+        <Accordion allowMultiple bg="gray.900" maxWidth="100%">
           {days.map((day) => {
             const shiftsForDay = filteredUsers.filter((user) =>
               user.shifts.some((s) => {
