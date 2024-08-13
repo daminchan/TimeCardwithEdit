@@ -39,9 +39,6 @@ export default function ShiftEditPageContent({
           <ShiftEditTable users={users} year={year} month={month} />
         )}
       </Box>
-      <Link href="/admin/user-management">
-        <CustomButton width="100%">ユーザー管理</CustomButton>
-      </Link>
     </Flex>
   );
 }

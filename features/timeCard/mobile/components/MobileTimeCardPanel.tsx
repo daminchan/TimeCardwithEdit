@@ -62,7 +62,12 @@ export default function MobileTimeCardPanel({
   const isClockOutDisabled = !entry?.startTime || !!entry?.endTime;
 
   return (
-    <Box bg="rgba(255, 255, 255, 0.2)" borderRadius="15px" shadow="sm" p={4}>
+    <Box
+      bg="rgba(255, 255, 255, 0.2)"
+      borderRadius="15px"
+      boxShadow="0 6px 12px rgba(0, 0, 0, 0.5)"
+      p={4}
+    >
       <Flex direction="column" gap={4}>
         <MobileTimeCardDisplay entry={entry} />
         <MobileToggleButton

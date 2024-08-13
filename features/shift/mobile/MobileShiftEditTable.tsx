@@ -5,11 +5,18 @@ import React from 'react';
 import { Box, Flex, Text, Button, Divider } from '@chakra-ui/react';
 import { format, setDate } from 'date-fns';
 import { ja } from 'date-fns/locale';
-import Select from 'react-select';
+import dynamic from 'next/dynamic';
+import Select, { Props } from 'react-select';
+
+import CustomButton from '@/components/button/CustomButton';
 
 import { ShiftModal } from '../components/ShiftModal';
 import { useShiftManagement } from '../hooks/useShiftManagement';
 import { ShiftTableProps } from '../types';
+
+const DynamicSelect = dynamic<Props<any, false>>(() => import('react-select'), {
+  ssr: false,
+});
 
 export default function MobileShiftEditTable({
   users,
@@ -78,22 +85,26 @@ export default function MobileShiftEditTable({
   return (
     <Flex direction="column" gap={4}>
       <Flex gap={2}>
-        <Select
-          options={dayOptions}
-          value={dayOptions.find((option) => option.value === selectedDay)}
-          onChange={(option) => setSelectedDay(option?.value || days[0])}
-          styles={customStyles}
-        />
-        <Select
+        {/* 日付選択が必要になった場合、以下のようにDynamicSelectを使用して実装できます
+    <DynamicSelect
+      options={dayOptions}
+      value={dayOptions.find((option) => option.value === selectedDay)}
+      onChange={(option) => setSelectedDay(option?.value || days[0])}
+      styles={customStyles}
+    />
+    */}
+        <DynamicSelect
           options={userOptions}
           value={userOptions.find((option) => option.value === selectedUser)}
           onChange={(option) => setSelectedUser(option?.value || users[0]?.id)}
           styles={customStyles}
         />
       </Flex>
-      <Button onClick={() => openAddModal(selectedUser)}>シフト追加</Button>
+      <CustomButton onClick={() => openAddModal(selectedUser)}>
+        シフト追加
+      </CustomButton>
       <Divider />
-      <Flex direction="column" gap={4}>
+      {/* <Flex direction="column" gap={4}>
         {users.map((user) => {
           const shift = user.shifts.find((s) => {
             const shiftDate = new Date(s.startTime);
@@ -130,6 +141,52 @@ export default function MobileShiftEditTable({
             </Box>
           );
         })}
+      </Flex> */}
+      <Flex direction="column" gap={4}>
+        {users
+          .filter((user) => user.id === selectedUser)
+          .map((user) => (
+            <Box key={user.id} p={2} borderWidth={1} borderRadius="md">
+              <Text fontWeight="bold" mb={2}>
+                {user.name}のシフト
+              </Text>
+              {user.shifts.length > 0 ? (
+                user.shifts
+                  .sort(
+                    (a, b) =>
+                      new Date(a.startTime).getTime() -
+                      new Date(b.startTime).getTime()
+                  )
+                  .map((shift) => (
+                    <Flex key={shift.id} direction="column" gap={2} mb={4}>
+                      <Text>
+                        {format(new Date(shift.startTime), 'M/d(E)', {
+                          locale: ja,
+                        })}{' '}
+                        {formatTime(shift.startTime)} -{' '}
+                        {formatTime(shift.endTime)}
+                      </Text>
+                      <Flex gap={2}>
+                        <CustomButton
+                          size="sm"
+                          onClick={() => handleDelete(shift.id)}
+                        >
+                          削除
+                        </CustomButton>
+                        <CustomButton
+                          size="sm"
+                          onClick={() => openEditModal(shift)}
+                        >
+                          編集
+                        </CustomButton>
+                      </Flex>
+                    </Flex>
+                  ))
+              ) : (
+                <Text>シフトなし</Text>
+              )}
+            </Box>
+          ))}
       </Flex>
       <ShiftModal
         isOpen={isOpen}

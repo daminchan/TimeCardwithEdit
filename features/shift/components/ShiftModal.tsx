@@ -1,5 +1,7 @@
+'use client';
 import {
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -11,6 +13,9 @@ import {
   ModalHeader,
   ModalOverlay,
 } from '@chakra-ui/react';
+
+import CustomButton from '@/components/button/CustomButton';
+import FlexCol from '@/components/ui/FlexCol';
 
 import { EditedShift } from '../types';
 
@@ -54,31 +59,33 @@ export const ShiftModal: React.FC<ShiftModalProps> = ({
         <ModalHeader>{headerText}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl mt={4}>
-            <FormLabel>開始時間</FormLabel>
-            <Input
-              type="datetime-local"
-              value={editedShift.startTime}
-              onChange={handleStartTimeChange}
-            />
-          </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>終了時間</FormLabel>
-            <Input
-              type="datetime-local"
-              value={editedShift.endTime}
-              onChange={(e) =>
-                setEditedShift({ ...editedShift, endTime: e.target.value })
-              }
-            />
-          </FormControl>
+          <Flex direction="column" gap={4}>
+            <FormControl mt={4}>
+              <FormLabel>開始時間</FormLabel>
+              <Input
+                type="datetime-local"
+                value={editedShift.startTime}
+                onChange={handleStartTimeChange}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>終了時間</FormLabel>
+              <Input
+                type="datetime-local"
+                value={editedShift.endTime}
+                onChange={(e) =>
+                  setEditedShift({ ...editedShift, endTime: e.target.value })
+                }
+              />
+            </FormControl>
+            <Flex>
+              <CustomButton mr={3} onClick={onSubmit}>
+                {submitButtonText}
+              </CustomButton>
+              <CustomButton onClick={onClose}>キャンセル</CustomButton>
+            </Flex>
+          </Flex>
         </ModalBody>
-        <ModalFooter>
-          <Button mr={3} onClick={onSubmit}>
-            {submitButtonText}
-          </Button>
-          <Button onClick={onClose}>キャンセル</Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
