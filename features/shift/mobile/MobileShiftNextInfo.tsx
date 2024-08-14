@@ -1,4 +1,4 @@
-import { Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import { Shift } from '@prisma/client';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
@@ -16,11 +16,11 @@ export default function MobileShiftNextInfo({
 }: MobileShiftNextInfoProps) {
   if (!nextShift) return null;
   return (
-    <FlexCol gap={2}>
-      <Heading as="h3" size="lg" fontWeight="bold" color="gray.200">
+    <Flex direction="column" gap={2} w="100%" align="center" justify="center">
+      <Heading size="lg" color="gray.200">
         次回のシフト
       </Heading>
-      <Text fontSize="md" fontWeight="bold" color="gray.200">
+      <Text color="gray.200">
         {format(new Date(nextShift.startTime), 'M月d日(E) HH:mm', {
           locale: ja,
         })}{' '}
@@ -29,6 +29,6 @@ export default function MobileShiftNextInfo({
       <Text fontSize="md" fontWeight="bold" color="gray.200">
         他の対応メンバー数: {coworkerCount}人
       </Text>
-    </FlexCol>
+    </Flex>
   );
 }

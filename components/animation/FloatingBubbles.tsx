@@ -36,6 +36,17 @@ const defaultAnimationRange: AnimationRange = {
 };
 const defaultPosition = { top: '0', left: '0' };
 
+const blueBubbleColors = {
+  color1: 'rgba(65, 105, 225, 0.4)', // ロイヤルブルー
+  color2: 'rgba(135, 206, 250, 0.5)', // ライトスカイブルー
+  color3: 'rgba(30, 144, 255, 0.4)', // ドジャーブルー
+};
+const orangeBubbleColors = {
+  color1: 'rgba(255, 140, 0, 0.4)', // ダークオレンジ
+  color2: 'rgba(255, 165, 0, 0.5)', // オレンジ
+  color3: 'rgba(255, 69, 0, 0.4)', // レッドオレンジ
+};
+
 export default function FloatingBubbles({
   bubbles,
   position = defaultPosition,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text, VStack } from '@chakra-ui/react';
 import { Shift } from '@prisma/client';
 import { User } from 'next-auth';
 
@@ -26,15 +26,27 @@ export default function MobileUserInfoPanel({
   upcomingShifts,
 }: MobileUserInfoPanelProps) {
   return (
-    <Box borderRadius="lg" p={4}>
-      <FlexCol gap={4}>
+    <Flex
+      align="center"
+      justify="center"
+      borderRadius="15px"
+      boxShadow="0 6px 12px rgba(0, 0, 0, 0.5)"
+      width="100%"
+    >
+      <Flex
+        direction="column"
+        gap={3}
+        width="100%"
+        align="center"
+        justify="center"
+      >
         <Text fontSize="lg">{user.name}さん</Text>
         <MobileShiftNextInfo
           nextShift={nextShift}
           coworkerCount={coworkerCount}
         />
         <MobileShiftUpcomingList shifts={upcomingShifts} />
-        <FlexCol gap={6}>
+        <FlexCol gap={2}>
           <NavButton href="/user/timecard-view">タイムカード</NavButton>
           {user.role === 'admin' && (
             <>
@@ -42,7 +54,7 @@ export default function MobileUserInfoPanel({
             </>
           )}
         </FlexCol>
-      </FlexCol>
-    </Box>
+      </Flex>
+    </Flex>
   );
 }
