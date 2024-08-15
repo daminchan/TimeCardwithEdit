@@ -73,13 +73,11 @@ export default function ShiftEditPageContent({
           >
             {isMobile ? (
               isLandscape ? (
-                <LandscapeViewport>
-                  <LandscapeMobileShiftTable
-                    users={users}
-                    year={year}
-                    month={month}
-                  />
-                </LandscapeViewport>
+                <LandscapeMobileShiftTable
+                  users={users}
+                  year={year}
+                  month={month}
+                />
               ) : (
                 <MobileShiftEditTable users={users} year={year} month={month} />
               )
