@@ -13,7 +13,7 @@ export const createShiftActionToast = (
   toast: (options: UseToastOptions) => ToastId
 ): UseToastOptions => ({
   render: ({ onClose }) => (
-    <Box p={4} bg="blue.500" color="white" borderRadius="md">
+    <Box p={4} bg="gray.500" color="white" borderRadius="md">
       <Flex direction="column" alignItems="center">
         <Box textAlign="center" mb={3}>
           <Text fontWeight="bold" fontSize="lg">
@@ -24,7 +24,6 @@ export const createShiftActionToast = (
           </Text>
         </Box>
         <Button
-          variant="customToast"
           size="md"
           onClick={async () => {
             onClose();

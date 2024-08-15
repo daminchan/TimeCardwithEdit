@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+
 import {
   Box,
   Text,
@@ -15,6 +16,7 @@ import { format, setDate, isSameDay } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
 import FlexCol from '@/components/ui/FlexCol';
+
 import { ShiftTableProps } from '../types';
 
 export default function MobileShiftViewTable({

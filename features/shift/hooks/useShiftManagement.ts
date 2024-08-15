@@ -56,18 +56,43 @@ export const useShiftManagement = () => {
     }
   };
 
+  // const handleAddShift = async () => {
+  //   if (selectedShift && !selectedShift.id) {
+  //     toast(
+  //       createShiftActionToast(
+  //         '追加',
+  //         async () => {
+  //           await createShift(selectedShift.userId, getShiftData());
+  //           onClose(); // モーダルを閉じる
+  //         },
+  //         toast
+  //       )
+  //     );
+  //   }
+  // };
+
   const handleAddShift = async () => {
     if (selectedShift && !selectedShift.id) {
-      toast(
-        createShiftActionToast(
-          '追加',
-          async () => {
-            await createShift(selectedShift.userId, getShiftData());
-            onClose(); // モーダルを閉じる
-          },
-          toast
-        )
-      );
+      try {
+        await createShift(selectedShift.userId, getShiftData());
+        onClose(); // モーダルを閉じる
+        toast({
+          title: 'シフトを追加しました',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
+      } catch (error) {
+        console.error('Shift addition failed:', error);
+        toast({
+          title: 'シフトの追加に失敗しました',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
     }
   };
 

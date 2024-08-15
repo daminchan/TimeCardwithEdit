@@ -6,12 +6,12 @@ import { Shift } from '@prisma/client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User } from 'next-auth';
 
+import FloatingBubbles from '@/components/animation/FloatingBubbles';
 import MobileFlexColumnContainer from '@/components/ui/MobileFlexColumnContainer';
 import { ShiftTableUser } from '@/features/shift/types';
 
 import MobileShiftViewTable from './MobileShiftViewTable';
 import MobileUserInfoPanel from './MobileUserInfoPanel';
-import FloatingBubbles from '@/components/animation/FloatingBubbles';
 
 type MobileMyPageViewProps = {
   user: User;

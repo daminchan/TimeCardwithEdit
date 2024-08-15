@@ -1,13 +1,10 @@
-import { Box, Container, Heading, Link } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { unstable_cache } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/auth';
-import CustomButton from '@/components/button/CustomButton';
-import FlexCol from '@/components/ui/FlexCol';
 import { getMonthlyShifts } from '@/features/shift/actions/shiftActions';
 import ShiftEditPageContent from '@/features/shift/components/ShiftEditPageContent';
-import ShiftEditTable from '@/features/shift/components/ShiftEditTable';
 
 // キャッシュされたgetMonthlyShifts関数を作成
 const cachedGetMonthlyShifts = unstable_cache(
