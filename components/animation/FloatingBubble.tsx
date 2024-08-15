@@ -103,6 +103,7 @@ export default function FloatingBubble({
       width={`${size}px`}
       height={`${size}px`}
       overflow="visible" // この行を追加
+      background="transparent" // この行を追加
     >
       <AnimatePresence>
         {isVisible && (
@@ -127,7 +128,11 @@ export default function FloatingBubble({
                 times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
               }}
             >
-              <Box position="relative" onClick={handleClick}>
+              <Box
+                position="relative"
+                background="transparent"
+                onClick={handleClick}
+              >
                 <AnimatePresence>
                   {isClicked && (
                     <motion.div
@@ -161,7 +166,8 @@ export default function FloatingBubble({
                     borderRadius="full"
                     width={`${size}px`}
                     height={`${size}px`}
-                    boxShadow="0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5)"
+                    boxShadow="none"
+                    // boxShadow="0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5)"
                     _before={{
                       content: '""',
                       position: 'absolute',
@@ -169,6 +175,7 @@ export default function FloatingBubble({
                       left: '-50%',
                       width: '200%',
                       height: '200%',
+
                       // background:
                       //   'radial-gradient(circle at 70% 70%, rgba(255, 165, 0, 0.4), rgba(255, 255, 255, 0) 70%)',
 

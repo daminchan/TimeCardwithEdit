@@ -34,13 +34,7 @@ export default async function ShiftEditPage() {
   // キャッシュされた関数を使用
   const users = await cachedGetMonthlyShifts(year, month);
 
-  return (
-    <Box width="100%" minHeight="100vh">
-      <Container maxWidth="container.xl" py={8}>
-        <ShiftEditPageContent users={users} year={year} month={month} />
-      </Container>
-    </Box>
-  );
+  return <ShiftEditPageContent users={users} year={year} month={month} />;
   // return (
   //   <Box width="100%" minHeight="100vh">
   //     <Container maxWidth="container.xl" py={8}>

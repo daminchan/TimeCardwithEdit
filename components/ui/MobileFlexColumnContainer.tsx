@@ -19,6 +19,8 @@ export default function MobileFlexColumnContainer({
       py={6}
       flexDirection="column"
       gap={6}
+      maxWidth="100%" // この行を変更
+      overflowX="hidden" // この行を追加
       {...props}
     >
       {children}

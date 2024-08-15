@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { unstable_cache } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -33,16 +33,18 @@ export default async function MyPage() {
     : [];
 
   return (
-    <Box>
-      <ShiftViewPageContent
-        user={session.user}
-        nextShift={nextShift}
-        coworkerCount={coworkerCount}
-        upcomingShifts={upcomingShifts}
-        users={users}
-        year={year}
-        month={month}
-      />
+    <Box width="100%" minHeight="100vh" overflowX="hidden">
+      <Container maxWidth="container.xl" py={8}>
+        <ShiftViewPageContent
+          user={session.user}
+          nextShift={nextShift}
+          coworkerCount={coworkerCount}
+          upcomingShifts={upcomingShifts}
+          users={users}
+          year={year}
+          month={month}
+        />
+      </Container>
     </Box>
   );
 }
