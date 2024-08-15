@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-import { Box, Flex, Spinner, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Spinner, useBreakpointValue } from '@chakra-ui/react';
 import { Shift } from '@prisma/client';
 import { User } from 'next-auth';
 
