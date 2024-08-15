@@ -132,6 +132,12 @@ export default function FloatingBubble({
                 position="relative"
                 background="transparent"
                 onClick={handleClick}
+                // 以下の2行を追加
+                width={`${size}px`}
+                height={`${size}px`}
+                // borderRadius="full"を"50%"に変更
+                borderRadius="full"
+                // 以下の行を追加
               >
                 <AnimatePresence>
                   {isClicked && (
@@ -166,8 +172,7 @@ export default function FloatingBubble({
                     borderRadius="full"
                     width={`${size}px`}
                     height={`${size}px`}
-                    boxShadow="none"
-                    // boxShadow="0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5)"
+                    boxShadow="0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.5)"
                     _before={{
                       content: '""',
                       position: 'absolute',
