@@ -16,7 +16,9 @@ import { MdScreenRotation } from 'react-icons/md';
 import ShiftEditTable from './ShiftEditTable';
 import MobileShiftEditTable from '../mobile/MobileShiftEditTable';
 import { User } from '../types';
-import MobileLandscapeShiftTable from '../mobile/MobileLandscapeShiftTable';
+
+import LandscapeMobileShiftTable from '../mobile/LandscapeMobileShiftTable';
+import LandscapeViewport from '@/components/ui/LandscapeViewport';
 
 interface ShiftEditPageContentProps {
   users: User[];
@@ -37,46 +39,58 @@ export default function ShiftEditPageContent({
   };
 
   return (
-    <Flex direction="column" gap={6} width="100%">
-      <Flex justifyContent="space-between" alignItems="center">
-        <Heading
-          as="h1"
-          size={isMobile ? 'lg' : 'xl'}
-          textAlign={isMobile ? 'center' : 'left'}
-        >
-          シフト一覧
-        </Heading>
-        {isMobile && (
-          <Button
-            leftIcon={<MdScreenRotation />}
-            onClick={toggleLandscape}
-            size="sm"
+    <Box>
+      <Flex direction="column" gap={6} width="100%">
+        <Flex justifyContent="space-between" alignItems="center">
+          <Heading
+            as="h1"
+            size={isMobile ? 'lg' : 'xl'}
+            textAlign={isMobile ? 'center' : 'left'}
           >
-            {isLandscape ? '縦向き' : '横向き'}
-          </Button>
-        )}
+            シフト一覧
+          </Heading>
+          {isMobile && (
+            <Button
+              leftIcon={<MdScreenRotation />}
+              onClick={toggleLandscape}
+              size="sm"
+            >
+              {isLandscape ? '縦向き' : '横向き'}
+            </Button>
+          )}
+        </Flex>
+        <Box
+          borderRadius="lg"
+          shadow="lg"
+          p={isMobile ? 4 : 6}
+          maxWidth="100%"
+          overflow="hidden"
+        >
+          <Box
+            overflowX={isMobile && isLandscape ? 'auto' : 'visible'}
+            overflowY="auto"
+            maxHeight={isMobile && isLandscape ? 'calc(100vh - 150px)' : 'auto'}
+          >
+            {isMobile ? (
+              isLandscape ? (
+                <LandscapeViewport>
+                  <LandscapeMobileShiftTable
+                    users={users}
+                    year={year}
+                    month={month}
+                  />
+                </LandscapeViewport>
+              ) : (
+                <MobileShiftEditTable users={users} year={year} month={month} />
+              )
+            ) : (
+              <ShiftEditTable users={users} year={year} month={month} />
+            )}
+          </Box>
+        </Box>
       </Flex>
-      <Box
-        borderRadius="lg"
-        shadow="md"
-        p={isMobile ? 4 : 6}
-        overflowX={isLandscape ? 'auto' : 'visible'}
-      >
-        {isMobile ? (
-          isLandscape ? (
-            <MobileLandscapeShiftTable
-              users={users}
-              year={year}
-              month={month}
-            />
-          ) : (
-            <MobileShiftEditTable users={users} year={year} month={month} />
-          )
-        ) : (
-          <ShiftEditTable users={users} year={year} month={month} />
-        )}
-      </Box>
-    </Flex>
+    </Box>
+
     // <Flex direction="column" gap={6} width="100%">
     //   <Heading
     //     as="h1"
